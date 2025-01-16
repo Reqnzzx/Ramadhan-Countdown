@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadhan Countdown</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Agar teks dan countdown berada di bawahnya */
+            background: url('Background') no-repeat center center/cover;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        #title {
+            font-size: 30px;
+            margin-bottom: 20px; /* Jarak antara judul dan countdown */
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+
+        #countdown {
+            font-size: 60px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            background-color: rgba(0, 0, 0, 0.7); /* Transparan hitam */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+
+        /* Tambahan hiasan bulan sabit */
+        #decoration {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 80px;
+            height: 80px;
+            background: url('crescent.png') no-repeat center center/contain;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="decoration"></div>
+    <div id="title">Ramadhan Countdown</div>
+    <div id="countdown"></div>
+
+    <script>
+        // Ganti tanggal puasa di sini (misalnya 1 Maret 2025)
+        var countDownDate = new Date("Mar 1, 2025 00:00:00").getTime();
+
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Format countdown string
+            var countdownString = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            
+            document.getElementById("countdown").innerHTML = countdownString;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "Selamat Puasa!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
